@@ -5,12 +5,13 @@ class Solution:
         if len(nums) < 3:
             return []
 
+        nums.sort()
         result = set()
         for i, target in enumerate(nums):
             need_nums = {}
             for j, num in enumerate(nums[i+1:]):
                 if num in need_nums:
-                    result.add(tuple(sorted([need_nums[num], num, nums[i]])))
+                    result.add(tuple([nums[i], need_nums[num], num]))
                 need_nums[-target - num] = num
 
         return [list(vals) for vals in result]
